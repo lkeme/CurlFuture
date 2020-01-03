@@ -1,5 +1,5 @@
 {
-    "name": "calabashdoll/curl-future",
+    "name": "lkeme/curl-future",
     "description": "Parallel CURL Requests with PHP",
     "type": "library",
     "license": "MIT",
