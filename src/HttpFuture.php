@@ -13,6 +13,7 @@ class HttpFuture extends Future
      * @autor fang
      * @param $url 请求url地址
      * @param $options = array(),
+     * @param $other_options = array(),
      *        header:头信息(Array),
      *        proxy_url,
      *        timeout:超时时间，可以小于1
@@ -21,11 +22,11 @@ class HttpFuture extends Future
      * @version 2015年11月27日17:34:56
      *
      */
-    public function __construct($url, $options = [])
+    public function __construct($url, $options = [], $other_options = [])
     {
         $mt = TaskManager::getInstance();
 
-        $ch = $mt->addTask($url, $options);
+        $ch = $mt->addTask($url, $options, $other_options);
 
         $this->callback = function ($data) use ($mt, $ch) {
             return $mt->fetch($ch);

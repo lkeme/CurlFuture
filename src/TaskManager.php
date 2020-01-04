@@ -40,11 +40,12 @@ class TaskManager
      * @use 添加curl任务，options参考HttpFuture::__construct
      * @param $url
      * @param $options
+     * @param $other_options
      * @return false|resource
      */
-    public function addTask($url, $options)
+    public function addTask($url, $options, $other_options)
     {
-        $req = new Task($url, $options);
+        $req = new Task($url, $options, $other_options);
         $ch = $req->ch;
 
         $this->runningTasks[(int)$ch] = array(
