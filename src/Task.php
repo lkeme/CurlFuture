@@ -3,9 +3,7 @@
 namespace CurlFuture;
 
 /**
- * Task类，封装每个curl handle的输入输出方法，如果需要日志、异常处理，可以放在这个地方
- * @author fang
- * @version 2015年11月25日09:45:05
+ * @use Task类，封装每个curl handle的输入输出方法，如果需要日志、异常处理，可以放在这个地方
  */
 class Task
 {
@@ -14,27 +12,26 @@ class Task
     protected $curlOptions = array();
 
     /**
-     * 构造函数，供TaskManager调用
-     * @author fang
-     * @version 2015年11月25日09:52:00
+     * Task constructor.
+     * @use 构造函数，供TaskManager调用
+     * @param $url
+     * @param $options
+     * @param $other_options
      */
-    public function __construct($url, $options)
+    public function __construct($url, $options, $other_options = [])
     {
         $this->url = $url;
         $ch = curl_init();
 
-
-        $curlOptions = array(
+        $curlOptions = [
             CURLOPT_TIMEOUT => 1,
             CURLOPT_RETURNTRANSFER => 1,
             CURLOPT_URL => $url,
-
-        );
+        ];
 
         //这个地方需要合并cat的头信息
-        $headers = isset($options['header']) ? $options['header'] : array();
+        $headers = isset($options['header']) ? $options['header'] : [];
         $curlOptions[CURLOPT_HTTPHEADER] = $headers;
-
         if (isset($options['proxy_url']) && $options['proxy_url']) {
             $curlOptions[CURLOPT_PROXY] = $options['proxy_url'];
         }
@@ -51,7 +48,6 @@ class Task
         // 如果需要post数据
         if (isset($options['post_data']) && $options['post_data']) {
             $curlOptions[CURLOPT_POST] = true;
-
             curl_setopt($ch, CURLOPT_POST, true);
             $postData = $options['post_data'];
             if (is_array($options['post_data'])) {
@@ -60,6 +56,8 @@ class Task
             $curlOptions[CURLOPT_POSTFIELDS] = $postData;
         }
 
+        // 拼接覆盖CURL_OPT
+        $curlOptions = $other_options + $curlOptions;
         curl_setopt_array($ch, $curlOptions);
 
         $this->ch = $ch;
@@ -67,22 +65,17 @@ class Task
 
 
     /**
-     * 请求完成后调用，可以在这个函数里面加入日志与统计布点，返回http返回结果
-     * @return 成功string，失败false
-     * @version 2015年11月25日09:52:00
-     * @author fang
+     * @use 请求完成后调用，可以在这个函数里面加入日志与统计布点，返回http返回结果
+     * @return bool|string
      */
     public function complete()
     {
         return $this->getContent();
     }
 
-
     /**
-     * 如果curl已经完成，通过这个函数读取内容
-     * @return 成功string，失败false
-     * @version 2015年11月25日09:52:00
-     * @author fang
+     * @use 如果curl已经完成，通过这个函数读取内容 成功string，失败false
+     * @return bool|string
      */
     private function getContent()
     {

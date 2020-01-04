@@ -1,16 +1,18 @@
 {
-    "name": "lkeme/curl-future",
-    "description": "Parallel CURL Requests with PHP",
-    "type": "library",
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "leo",
-            "email": "263068280@qq.com"
-        }
-    ],
-    "autoload":{
-	"psr-4":{"CurlFuture\\":"src/"}
-    },
-    "require": {}
+  "name": "lkeme/curl-future",
+  "description": "Parallel CURL Requests with PHP --Fork",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "leo",
+      "email": "263068280@qq.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "CurlFuture\\": "src/"
+    }
+  },
+  "require": {}
 }

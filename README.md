@@ -1,6 +1,7 @@
 # CurlFuture: PHP Curl并行轮转请求库
+> 当前项目为`Fork分支`，仅修改必要自用功能需求，保留主分支信息。
 
-multicurl系列方法是提高php请求后端http接口的一种途径。但是直接使用的话，存在几方面问题：
+MultiCurl系列方法是提高php请求后端http接口的一种途径。但是直接使用的话，存在几方面问题：
 
 - 部分版本的curl扩展有bug，需要用特定的方式来调用([Rolling cURL: PHP并发最佳实践](http://www.searchtb.com/2012/06/rolling-curl-best-practices.html))
 - 网上流传的CurlRolling库都只支持前面加入，最后一并执行这种使用模式。而最理想的是随时加入，需要的时候从里面取出所需的结果，且不需等待其他请求返回

@@ -21,7 +21,7 @@ class HttpFuture extends Future
      * @version 2015年11月27日17:34:56
      *
      */
-    public function __construct($url, $options = array())
+    public function __construct($url, $options = [])
     {
         $mt = TaskManager::getInstance();
 

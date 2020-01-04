@@ -37,10 +37,10 @@ class TaskManager
     }
 
     /**
-     * 添加curl任务，options参考HttpFuture::__construct
-     * @return curl_handle
-     * @version 2015年11月25日09:52:00
-     * @author fang
+     * @use 添加curl任务，options参考HttpFuture::__construct
+     * @param $url
+     * @param $options
+     * @return false|resource
      */
     public function addTask($url, $options)
     {
@@ -59,10 +59,9 @@ class TaskManager
     }
 
     /**
-     * 如果ch未完成，阻塞并且并行执行curl请求，直到对应ch完成，返回对应结果
-     * @return string
-     * @version 2015年11月25日09:52:00
-     * @author fang
+     * @use 如果ch未完成，阻塞并且并行执行curl请求，直到对应ch完成，返回对应结果
+     * @param $ch
+     * @return bool|mixed
      */
     public function fetch($ch)
     {
